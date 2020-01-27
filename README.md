@@ -169,10 +169,11 @@ Currently none
   - added auto upgrading of arkmanager
 + 1.5 :
   - fixed arkmanager upgrade
-
 + 1.6:
   - Initial from boerngen-schmidt/Ark-docker
   - Fixed some bugs
   - Moved to CentOS8
   - Added some modifications to the default config
   - Added RCON Port ENV-Vars
++ 1.7:
+  - Added Docker-Healthcheck (status becomes unhealthy while arkmanager runns update)
