@@ -30,10 +30,12 @@ RUN yum -y install glibc.x86_64 libstdc++.x86_64 git lsof bzip2 cronie perl-Comp
 COPY run.sh /home/steam/run.sh
 COPY user.sh /home/steam/user.sh
 COPY crontab /home/steam/crontab
+COPY ark-healthcheck.sh /home/steam/crontab
 COPY arkmanager-user.cfg /home/steam/arkmanager.cfg
 
 RUN chmod 777 /home/steam/run.sh \
  && chmod 777 /home/steam/user.sh \
+ && chmod 777 /home/steam/ark-healthcheck.sh \
  ## Always get the latest version of ark-server-tools
  && git clone --single-branch --depth 1 https://github.com/FezVrasta/ark-server-tools.git /home/steam/ark-server-tools \
  && cd /home/steam/ark-server-tools/tools \
@@ -63,3 +65,5 @@ WORKDIR /ark
 
 # Update game launch the game.
 ENTRYPOINT ["/home/steam/user.sh"]
+
+HEALTHCHECK --interval=600s --timeout=60s --retries=2 --start-period=600s CMD /home/steam/ark-healthcheck.sh
