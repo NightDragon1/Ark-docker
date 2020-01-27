@@ -59,7 +59,7 @@ cat /ark/crontab | crontab -
 
 # Launching ark server
 if [ $UPDATEONSTART -eq 0 ]; then
-	arkmanager start -noautoupdate
+	arkmanager start --noautoupdate
 else
 	arkmanager start
 fi
