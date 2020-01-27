@@ -1,5 +1,5 @@
 FROM centos:7
-MAINTAINER boerngenschmidt
+LABEL maintainer="NightDragon"
 
 # Var for first config
 ENV SESSIONNAME="Ark Docker" \
