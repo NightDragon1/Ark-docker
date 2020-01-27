@@ -30,7 +30,7 @@ RUN yum -y install glibc.x86_64 libstdc++.x86_64 git lsof bzip2 cronie perl-Comp
 COPY run.sh /home/steam/run.sh
 COPY user.sh /home/steam/user.sh
 COPY crontab /home/steam/crontab
-COPY ark-healthcheck.sh /home/steam/crontab
+COPY ark-healthcheck.sh /home/steam/ark-healthcheck.sh
 COPY arkmanager-user.cfg /home/steam/arkmanager.cfg
 
 RUN chmod 777 /home/steam/run.sh \
