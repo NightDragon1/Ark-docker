@@ -172,3 +172,7 @@ Currently none
 
 + 1.6:
   - Initial from boerngen-schmidt/Ark-docker
+  - Fixed some bugs
+  - Moved to CentOS8
+  - Added some modifications to the default config
+  - Added RCON Port ENV-Vars
