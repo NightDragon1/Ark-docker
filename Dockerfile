@@ -1,7 +1,7 @@
 FROM centos:8
 LABEL maintainer="NightDragon"
 
-# Var for first config
+# Bootstrapping variables
 ENV SESSIONNAME="ARK Docker" \
     SERVERMAP="TheIsland" \
     SERVERPASSWORD="" \
@@ -11,11 +11,15 @@ ENV SESSIONNAME="ARK Docker" \
     BACKUPONSTART=1 \
     SERVERPORT=27015 \
     STEAMPORT=7778 \
+    RCONPORT=32330 \
     BACKUPONSTOP=1 \
     WARNONSTOP=1 \
     ARK_UID=1000 \
     ARK_GID=1000 \
     TZ=UTC
+
+## Ensure latest version
+RUN yum upgrade -y
 
 ## Install dependencies
 RUN yum -y install glibc.x86_64 libstdc++.x86_64 git lsof bzip2 cronie perl-Compress-Zlib \
@@ -47,10 +51,11 @@ COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
 # Define default config file in /etc/arkmanager
 COPY instance.cfg /etc/arkmanager/instances/main.cfg
 
-EXPOSE ${STEAMPORT} 32330 ${SERVERPORT}
+EXPOSE ${STEAMPORT} ${RCONPORT} ${SERVERPORT}
 # Add UDP
 EXPOSE ${STEAMPORT}/udp ${SERVERPORT}/udp
 
+# Volume to be exposed for this server
 VOLUME  /ark
 
 # Change the working directory to /ark
