@@ -1,12 +1,12 @@
-FROM centos:7
+FROM centos:8
 LABEL maintainer="NightDragon"
 
 # Var for first config
-ENV SESSIONNAME="Ark Docker" \
+ENV SESSIONNAME="ARK Docker" \
     SERVERMAP="TheIsland" \
     SERVERPASSWORD="" \
     ADMINPASSWORD="adminpassword" \
-    MAX_PLAYERS=70 \
+    MAX_PLAYERS=10 \
     UPDATEONSTART=1 \
     BACKUPONSTART=1 \
     SERVERPORT=27015 \
@@ -18,7 +18,7 @@ ENV SESSIONNAME="Ark Docker" \
     TZ=UTC
 
 ## Install dependencies
-RUN yum -y install glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib \
+RUN yum -y install glibc.x86_64 libstdc++.x86_64 git lsof bzip2 cronie perl-Compress-Zlib \
  && yum clean all \
  && adduser -u $ARK_UID -s /bin/bash -U steam
 
@@ -31,7 +31,7 @@ COPY arkmanager-user.cfg /home/steam/arkmanager.cfg
 RUN chmod 777 /home/steam/run.sh \
  && chmod 777 /home/steam/user.sh \
  ## Always get the latest version of ark-server-tools
- && git clone -b $(git ls-remote --tags https://github.com/FezVrasta/ark-server-tools.git | awk '{print $2}' | grep -v '{}' | awk -F"/" '{print $3}' | tail -n 1) --single-branch --depth 1 https://github.com/FezVrasta/ark-server-tools.git /home/steam/ark-server-tools \
+ && git clone --single-branch --depth 1 https://github.com/FezVrasta/ark-server-tools.git /home/steam/ark-server-tools \
  && cd /home/steam/ark-server-tools/tools \
  && bash install.sh steam --bindir=/usr/bin \
  && (crontab -l 2>/dev/null; echo "* 3 * * Mon yes | arkmanager upgrade-tools >> /ark/log/arkmanager-upgrade.log 2>&1") | crontab - \
