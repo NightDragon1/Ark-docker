@@ -174,7 +174,7 @@ Currently none
     - Added support for automatically updating on restart
     - Show a spinner when updating
   - Add UID & GID to set the uid & gid of the user used in the container (and permissions on the volume /ark)
-+ 1.4 : **Maintainer switch**
++ 1.4 : **Maintainer switch: boerngen-schmidt/Ark-docker**
   - changed from ubuntu to centOS 7
   - added timezone support
   - image now always pulls latest Ark Server Tools
@@ -183,10 +183,10 @@ Currently none
   - added auto upgrading of arkmanager
 + 1.5 :
   - fixed arkmanager upgrade
-+ 1.6:
++ 1.6: **Maintainer switch: NightDragon1/Ark-docker**
   - Initial from boerngen-schmidt/Ark-docker
   - Fixed some bugs
-  - Moved to CentOS8
+  - Updated from CentOS 7 to CentOS 8
   - Added some modifications to the default config
   - Added RCON Port ENV-Vars
 + 1.7:
