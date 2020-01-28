@@ -7,6 +7,19 @@ This image uses [Ark Server Tools](https://github.com/FezVrasta/ark-server-tools
 *If you use an old volume, get the new arkmanager.cfg in the template directory.*  
 __Don't forget to use `docker pull NightDragon1/ark-docker` to get the latest version of the image__
 
+__IMPORTED INFO for those who wanna migrate!__ 
+If you haven't been using this docker-image before, just go ahead creating it like explained in "__Usage__".
+If you have been using another image before, like boerngenschmidt/Ark-docker, you'll have to two do things:
+1. Remove the old container instance using __docker rm__....
+2. Recreate the new container instance with the same parameters as before, optionally: add/set the new ENVIRONMENT variable "RCONPORT" to your __docker create__
+3. In case you are using your existing arkamanger.cfg, add the following lines to your file:
+```
+ark_Port=${STEAMPORT}
+ark_QueryPort=${SERVERPORT}
+ark_RCONEnabled="True"
+ark_RCONPort=${RCONPORT}
+```
+
 ## Features
  - Easy install (no steamcmd / lib32... to install)
  - Use Ark Server Tools : update/install/start/backup/rcon/mods
@@ -16,6 +29,7 @@ __Don't forget to use `docker pull NightDragon1/ark-docker` to get the latest ve
  - `Docker stop` is a clean stop 
  - Auto upgrading of arkmanager
  - An Up to date Docker Images for ARK-Docker
+ - Docker Healthcheck
 
 ## Usage
 Fast & Easy server setup :   
@@ -29,7 +43,7 @@ You can manager your server with rcon if you map the rcon port (you can rebind t
 `docker run -d -p 7778:7778 -p 7778:7778/udp -p 27015:27015 -p 27015:27015/udp -p 32330:32330  -e SESSIONNAME=myserver --name ark NightDragon1/ark-docker`  
 
 You can change server and steam port to allow multiple servers on same host:  
-*(You can't just rebind the port with docker. It won't work, you need to change STEAMPORT & SERVERPORT variable)*
+*(You can't just rebind the port with docker. It won't work, you need to change STEAMPORT, SERVERPORT & RCONPORT variable)*
 `docker run -d -p 7779:7779 -p 7779:7779/udp -p 27016:27016 -p 27016:27016/udp -p 32331:32330  -e SESSIONNAME=myserver2 -e SERVERPORT=27016 -e STEAMPORT=7779 --name ark2 NightDragon1/ark-docker`  
 
 You can check your server with :  
@@ -132,7 +146,7 @@ To add mods, you only need to change the variable ark_GameModIds in *arkmanager.
 ## Expose
 + Port : __STEAMPORT__ : Steam port (default: 7778)
 + Port : __SERVERPORT__ : server port (default: 27015)
-+ Port : __32330__ : rcon port
++ Port : __RCONPORT__ : rcon port (default: 32330)
 
 ## Known issues
 Currently none
