@@ -5,7 +5,7 @@
 # Author: R. Holzknecht aka NightDragon  #
 ##########################################
 
-export arkrunning=$(arkmanager status | sed -n 2p | sed -e 's/\x1b\[[0-9;]*m//g'  | tr -d ' ' | cut -d ':' -f2)
+export arkrunning=$(arkmanager status | sed -n 4p | sed -e 's/\x1b\[[0-9;]*m//g'  | tr -d ' ' | cut -d ':' -f2)
 
 if [[ $arkrunning  == "Yes" ]]; then
   echo 0
