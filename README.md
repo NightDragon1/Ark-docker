@@ -191,3 +191,5 @@ Currently none
   - Added RCON Port ENV-Vars
 + 1.7:
   - Added Docker-Healthcheck (status becomes unhealthy while arkmanager runns update)
++ 1.7.1:
+  - Changed Healthcheck for "Server listening" instead of "Server running"
