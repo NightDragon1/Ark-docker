@@ -193,3 +193,7 @@ Currently none
   - Added Docker-Healthcheck (status becomes unhealthy while arkmanager runns update)
 + 1.7.1:
   - Changed Healthcheck for "Server listening" instead of "Server running"
++ 1.7.2:
+  - Fixed Healthcheck
++ 1.7.3:
+  - Updated compose-file
