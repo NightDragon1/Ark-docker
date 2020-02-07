@@ -8,9 +8,9 @@
 export arkrunning=$(arkmanager status | sed -n 4p | sed -e 's/\x1b\[[0-9;]*m//g'  | tr -d ' ' | cut -d ':' -f2)
 
 if [[ $arkrunning  == "Yes" ]]; then
-  echo 0
+  exit 0
 else
-  echo 1
+  exit 1
 fi
 
 unset arkrunning
