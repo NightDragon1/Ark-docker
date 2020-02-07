@@ -1,6 +1,6 @@
 ark:
   container_name: ark
-  image: boerngenschmidt/ark-docker
+  image: nightdragon1/ark-docker
   environment:
     - SESSIONNAME=Ark Docker
     - SERVERMAP=TheIsland
@@ -8,6 +8,7 @@ ark:
     - SERVERPASSWORD="" 
     - ADMINPASSWORD=adminpassword
     - SERVERPORT=27015
+    - RCONPORT=32330
     - STEAMPORT=7778
     - BACKUPONSTART=1
     - BACKUPONSTOP=1
