@@ -1,3 +1,5 @@
+![Shield.IO Badger](https://img.shields.io/docker/cloud/build/nightdragon1/ark-docker) [![](https://images.microbadger.com/badges/license/nightdragon1/ark-docker.svg)](https://microbadger.com/images/nightdragon1/ark-docker "Get your own license badge on microbadger.com")
+
 # ARK: Survival Evolved - Docker
 
 Docker build for managing an ARK: Survival Evolved server.
