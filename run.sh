@@ -44,7 +44,7 @@ if [ ! -d /ark/server  ] || [ ! -f /ark/server/version.txt ];then
 	mkdir -p /ark/server/ShooterGame/Content/Mods
 	mkdir -p /ark/server/ShooterGame/Binaries/Linux/
 	touch /ark/server/ShooterGame/Binaries/Linux/ShooterGameServer
-	arkmanager install
+	arkmanager install --verbose
 	# Create mod dir
 else
 	if [ ${BACKUPONSTART} -eq 1 ] && [ "$(ls -A server/ShooterGame/Saved/SavedArks/)" ]; then
@@ -59,9 +59,9 @@ cat /ark/crontab | crontab -
 
 # Launching ark server
 if [ $UPDATEONSTART -eq 0 ]; then
-	arkmanager start --noautoupdate
+	arkmanager start --noautoupdate  --verbose	
 else
-	arkmanager start
+	arkmanager start --verbose	
 fi
 
 
