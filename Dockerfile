@@ -22,7 +22,7 @@ ENV SESSIONNAME="ARK Docker" \
 RUN yum upgrade -y
 
 ## Install dependencies
-RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib \
+RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib net-tools \
  && yum clean all \
  && adduser -u $ARK_UID -s /bin/bash -U steam
 
