@@ -202,3 +202,5 @@ Currently none
   - Repository Cleanup
 + 1.7.4:
   - Update to run.sh
++ 1.7.5:
+  - Added net-tools (e.g. netstat) for issues related to 311.74
