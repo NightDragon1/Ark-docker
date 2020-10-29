@@ -202,3 +202,5 @@ Currently none
   - Repository Cleanup
 + 1.7.4:
   - Update to run.sh
++ 1.8:
+  - Added "arkmanager restart" to health check if failed
