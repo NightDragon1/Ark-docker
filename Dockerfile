@@ -1,4 +1,4 @@
-FROM centos:8
+FROM alpine:3.12
 LABEL maintainer="NightDragon"
 
 # Bootstrapping variables
@@ -18,13 +18,17 @@ ENV SESSIONNAME="ARK Docker" \
     ARK_GID=1000 \
     TZ=UTC
 
-## Ensure latest version
-RUN yum upgrade -y
+## Update package index
+RUN apk update
 
 ## Install dependencies
-RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib \
- && yum clean all \
- && adduser -u $ARK_UID -s /bin/bash -U steam
+RUN apk add git lsof bzip2 apk-cron perl-compress-raw-zlib libstdc++ sed curl net-tools
+## Switch to 32Bit ARCH to get also the 32bit of libstdc
+#RUN echo "x86" > /etc/apk/arch
+#RUN apk add --no-cache libstdc++
+
+# Run commands as the steam user
+RUN adduser -D --shell /bin/bash -g "" -u $ARK_UID steam
 
 # Copy & rights to folders
 COPY run.sh /home/steam/run.sh
