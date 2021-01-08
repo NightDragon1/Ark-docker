@@ -22,7 +22,7 @@ ENV SESSIONNAME="ARK Docker" \
 RUN apk update
 
 ## Install dependencies
-RUN apk add git lsof bzip2 apk-cron perl-compress-raw-zlib libstdc++ sed curl net-tools
+RUN apk add git lsof bzip2 apk-cron perl-compress-raw-zlib libstdc++ sed curl net-tools bash
 ## Switch to 32Bit ARCH to get also the 32bit of libstdc
 #RUN echo "x86" > /etc/apk/arch
 #RUN apk add --no-cache libstdc++
@@ -41,6 +41,7 @@ RUN chmod 777 /home/steam/run.sh \
  && chmod 777 /home/steam/user.sh \
  && chmod 777 /home/steam/ark-healthcheck.sh \
  ## Always get the latest version of ark-server-tools
+ && git config --global advice.detachedHead false \
  && git clone -b $(git ls-remote --tags https://github.com/arkmanager/ark-server-tools.git | awk '{print $2}' | grep -v '{}' | awk -F"/" '{print $3}' | tail -n 1) --single-branch --depth 1 https://github.com/arkmanager/ark-server-tools.git /home/steam/ark-server-tools \
  && cd /home/steam/ark-server-tools \
  && bash netinstall.sh steam --bindir=/usr/bin \
