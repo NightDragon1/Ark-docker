@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM steamcmd/steamcmd:alpine
 LABEL maintainer="NightDragon"
 
 # Bootstrapping variables
@@ -48,9 +48,7 @@ RUN chmod 777 /home/steam/run.sh \
  && (crontab -l 2>/dev/null; echo "* 3 * * Mon yes | arkmanager upgrade-tools >> /ark/log/arkmanager-upgrade.log 2>&1") | crontab - \
  && mkdir /ark \
  && chown steam /ark && chmod 755 /ark \
- && mkdir /home/steam/steamcmd \
- && cd /home/steam/steamcmd \
- && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
+ && mkdir /home/steam/steamcmd
 
 # Define default config file in /etc/arkmanager
 COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
