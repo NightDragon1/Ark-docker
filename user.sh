@@ -26,8 +26,8 @@ chown -R steam:steam /ark /home/steam
 chmod -R 777 /root/
 
 # Starting cron
-echo "Starting crond..."
-crond
+echo "Starting cron service..."
+cron
 
 # Launch run.sh with user steam
 su -p -c /home/steam/run.sh steam
