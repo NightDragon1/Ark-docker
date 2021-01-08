@@ -16,12 +16,11 @@ ENV SESSIONNAME="ARK Docker" \
     WARNONSTOP=1 \
     ARK_UID=1000 \
     ARK_GID=1000 \
-    TZ=UTC
-
+    TZ="Europe/Vienna"
 
 # Install dependencies 
-RUN apt-get update && apt-get install -y curl lib32gcc1 lsof git cron
-    
+RUN apt-get update && apt-get install -y curl lib32gcc1 lsof git cronie locales locales-all tzdata 
+
 RUN adduser \ 
 	--disabled-login \ 
 	--shell /bin/bash \ 
@@ -71,4 +70,4 @@ WORKDIR /ark
 # Update game launch the game.
 ENTRYPOINT ["/home/steam/user.sh"]
 
-HEALTHCHECK --interval=600s --timeout=60s --retries=2 --start-period=600s CMD /home/steam/ark-healthcheck.sh
+HEALTHCHECK --interval=600s --timeout=60s --retries=3 --start-period=600s CMD /home/steam/ark-healthcheck.sh
