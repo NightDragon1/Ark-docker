@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.10
 LABEL maintainer="NightDragon"
 
 # Bootstrapping variables
@@ -20,7 +20,7 @@ ENV SESSIONNAME="ARK Docker" \
 
 
 # Install dependencies 
-RUN apt-get update && apt-get install -y curl lib32gcc1 lsof git cron
+RUN apt-get update && apt-get install -y curl lib32gcc1-s1 lsof git cron
     
 RUN adduser \ 
 	--disabled-login \ 
