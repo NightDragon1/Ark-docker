@@ -1,4 +1,4 @@
-FROM ubuntu:1804.10
+FROM ubuntu:18.04
 LABEL maintainer="NightDragon"
 
 # Bootstrapping variables
