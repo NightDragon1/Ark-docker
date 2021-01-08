@@ -47,8 +47,7 @@ RUN chmod 777 /home/steam/run.sh \
  && bash netinstall.sh steam --bindir=/usr/bin \
  && (crontab -l 2>/dev/null; echo "* 3 * * Mon yes | arkmanager upgrade-tools >> /ark/log/arkmanager-upgrade.log 2>&1") | crontab - \
  && mkdir /ark \
- && chown steam /ark && chmod 755 /ark \
- && mkdir /home/steam/steamcmd
+ && chown steam /ark && chmod 755 /ark
 
 # Define default config file in /etc/arkmanager
 COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
