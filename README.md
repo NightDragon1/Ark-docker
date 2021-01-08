@@ -71,7 +71,7 @@ You can use rcon command via docker :
 `docker exec ark arkmanager rconcmd ListPlayers`  
 *Full list of available command [here](http://steamcommunity.com/sharedfiles/filedetails/?id=454529617&searchtext=admin)*
 
-__You can check all available command for arkmanager__ [here](https://github.com/FezVrasta/ark-server-tools/blob/master/README.md)
+__You can check all available command for arkmanager__ [here](https://github.com/arkmanager/ark-server-tools/blob/master/README.asciidoc)
 
 ### Crontab - Job automation
 You can easily configure automatic update and backup.  
