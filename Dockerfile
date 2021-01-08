@@ -19,7 +19,7 @@ ENV SESSIONNAME="ARK Docker" \
     TZ="Europe/Vienna"
 
 # Install dependencies 
-RUN apt-get update && apt-get install -y curl lib32gcc1 lsof git cronie locales locales-all tzdata 
+RUN apt-get update && apt-get install -y curl lib32gcc1 lsof git cron locales locales-all tzdata 
 
 RUN adduser \ 
 	--disabled-login \ 
