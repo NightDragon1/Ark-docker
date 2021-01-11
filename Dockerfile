@@ -48,6 +48,9 @@ RUN chmod 777 /home/steam/run.sh \
  && mkdir /home/steam/steamcmd \
  && cd /home/steam/steamcmd \
  && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
+ 
+#Install curdini for easier editing of the Game.ini and GameUser.ini
+RUN yum -y localinstall "https://download-ib01.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/c/crudini-0.9.3-1.el8.noarch.rpm"
 
 # Define default config file in /etc/arkmanager
 COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
