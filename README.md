@@ -206,3 +206,5 @@ Currently none
   - Added "arkmanager restart" to health check if failed
 + 1.9
   - Update to use new git repository of arkmanager
++ 2.0
+  - Added crudini to edit Game.ini oder GameUserSettings.ini
