@@ -1,6 +1,6 @@
 FROM centos:8
 LABEL maintainer="NightDragon"
-LABEL version="1.9"
+LABEL version="2.1"
 LABEL description="ARK Survival Evolved dedicated game server, based on CentOS including steamcmd, arkmanager and cron."
 
 # Bootstrapping variables
