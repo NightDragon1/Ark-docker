@@ -120,8 +120,10 @@ To add mods, you only need to change the variable ark_GameModIds in *arkmanager.
 + __SERVERMAP__ : Map of your ark server (default : "TheIsland")
 + __SERVERPASSWORD__ : Password of your ark server (default : "")
 + __ADMINPASSWORD__ : Admin password of your ark server (default : "adminpassword")
-+ __SERVERPORT__ : Ark server port (can't rebind with docker, it doesn't work) (default : 27015)
-+ __STEAMPORT__ : Steam server port (can't rebind with docker, it doesn't work) (default : 7778)
++ __ENABLERCON__ : valid falues are __true__ and __false__ . If set to true, RCON will be enabled
++ __SERVERPORT__ : Ark server port (default : 27015)
++ __STEAMPORT__ : Steam server port (default : 7778)
++ __RCONPORT__ : Use to set the RCON port  (default : 32330)
 + __MAX_PLAYERS__ : Number of maximum players (default : 70)
 + __BACKUPONSTART__ : Backup the server when the container is started. 0: no backup (default : 1)
 + __UPDATEPONSTART__ : Update the server when the container is started. 0: no update (default : 1)
@@ -130,6 +132,7 @@ To add mods, you only need to change the variable ark_GameModIds in *arkmanager.
 + __TZ__ : container timezone (for crontab). (default : "UTC").
 + __ARK_UID__ : ARK_UID of the user used. Owner of the volume /ark (default : 1000)
 + __ARK_GID__ : ARK_GID of the user used. Owner of the volume /ark (default : 1000)
++ __ARKCLUSTERID__ : A string to configure the cluster ID (used for cross server traveling)
 
 ## Volumes
 + __/ark__ : Working directory :
