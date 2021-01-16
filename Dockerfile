@@ -8,12 +8,14 @@ ENV SESSIONNAME="ARK Docker" \
     SERVERMAP="TheIsland" \
     SERVERPASSWORD="" \
     ADMINPASSWORD="adminpassword" \
-    MAX_PLAYERS=10 \
+    MAX_PLAYERS=60 \
+    ARKCLUSTERID=cluster1 \
     UPDATEONSTART=1 \
     BACKUPONSTART=1 \
     SERVERPORT=27015 \
     STEAMPORT=7778 \
     RCONPORT=32330 \
+    ENABLERCON=true \
     BACKUPONSTOP=1 \
     WARNONSTOP=1 \
     ARK_UID=1000 \
@@ -58,7 +60,7 @@ COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
 # Define default config file in /etc/arkmanager
 COPY instance.cfg /etc/arkmanager/instances/main.cfg
 
-EXPOSE ${STEAMPORT} ${RCONPORT} ${SERVERPORT}
+EXPOSE ${STEAMPORT} ${RCONPORT} ${SERVERPORT} 
 # Add UDP
 EXPOSE ${STEAMPORT}/udp ${SERVERPORT}/udp
 
