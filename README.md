@@ -208,3 +208,6 @@ Currently none
   - Update to use new git repository of arkmanager
 + 2.0
   - Added crudini to edit Game.ini oder GameUserSettings.ini
++ 2.1
+  - Made clusterid configureable via docker environment variable
+  - Made RCON enabled configurable via docker environment variable 
