@@ -40,6 +40,7 @@ cp /home/steam/crontab /ark/template/crontab
 
 if [ ! -d /ark/server  ] || [ ! -f /ark/server/version.txt ];then
 	echo "No game files found. Installing..."
+	mkdir -p /ark/server/steamapps
 	mkdir -p /ark/server/ShooterGame/Saved/SavedArks
 	mkdir -p /ark/server/ShooterGame/Content/Mods
 	mkdir -p /ark/server/ShooterGame/Binaries/Linux/
