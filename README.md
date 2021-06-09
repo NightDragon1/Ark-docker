@@ -214,3 +214,5 @@ Currently none
 + 2.1
   - Made clusterid configureable via docker environment variable
   - Made RCON enabled configurable via docker environment variable 
++ 2.2
+  - Bugfix release regaridng "disk write error" of steamcmd
