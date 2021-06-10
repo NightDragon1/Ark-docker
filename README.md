@@ -216,3 +216,5 @@ Currently none
   - Made RCON enabled configurable via docker environment variable 
 + 2.2
   - Bugfix release regaridng "disk write error" of steamcmd
++ 2.3
+  - Removed ARK Mod "ACM" to be configured per default as it's not compatible anymore with Gen2 and not maintaned too
