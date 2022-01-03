@@ -57,7 +57,7 @@ RUN chmod 777 /home/steam/run.sh \
  && mkdir /ark \
  && chown steam /ark && chmod 755 /ark \
  && mkdir /home/steam/steamcmd \
- && cd /home/steam/steamcmd
+ && cd /home/steam/steamcmd \
  && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
  
 # Define default config file in /etc/arkmanager
