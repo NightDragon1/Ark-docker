@@ -1,6 +1,6 @@
-FROM centos:8
+FROM steamcmd/steamcmd:alpine
 LABEL maintainer="NightDragon"
-LABEL version="2.2"
+LABEL version="3.0"
 LABEL description="ARK Survival Evolved dedicated game server, based on CentOS including steamcmd, arkmanager and cron."
 
 # Bootstrapping variables
@@ -23,12 +23,21 @@ ENV SESSIONNAME="ARK Docker" \
     TZ=UTC
 
 ## Ensure latest version
-RUN yum upgrade -y
+RUN apk add --upgrade apk-tools
+RUN apk upgrade --available
+
+## Linux style
+RUN apk add util-linux pciutils usbutils coreutils binutils findutils grep bash bash-doc bash-completion gcompat
+
 
 ## Install dependencies
-RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib \
- && yum clean all \
- && adduser -u $ARK_UID -s /bin/bash -U steam
+RUN apk add git bzip2 lsof perl-compress-raw-zlib git curl ncurses libstdc++
+
+
+#RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib \
+# && yum clean all \
+RUN addgroup -g ${ARK_GID} steam
+RUN adduser -D -u $ARK_UID -G steam -s /bin/bash steam
 
 # Copy & rights to folders
 COPY run.sh /home/steam/run.sh
@@ -48,12 +57,9 @@ RUN chmod 777 /home/steam/run.sh \
  && mkdir /ark \
  && chown steam /ark && chmod 755 /ark \
  && mkdir /home/steam/steamcmd \
- && cd /home/steam/steamcmd \
+ && cd /home/steam/steamcmd
  && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
  
-#Install curdini for easier editing of the Game.ini and GameUser.ini
-RUN yum -y localinstall "https://download-ib01.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/c/crudini-0.9.3-1.el8.noarch.rpm"
-
 # Define default config file in /etc/arkmanager
 COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
 
