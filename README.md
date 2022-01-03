@@ -220,3 +220,4 @@ Currently none
   - Removed ARK Mod "ACM" to be configured per default as it's not compatible anymore with Gen2 and not maintaned too
 + 3.0
   - Move to alpine linux for seveeral reasons (centos discontinued, smaller base, ...)
+  - crudini is not available anymore in this branch
