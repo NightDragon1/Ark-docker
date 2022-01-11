@@ -20,7 +20,10 @@ ENV SESSIONNAME="ARK Docker" \
     WARNONSTOP=1 \
     ARK_UID=1000 \
     ARK_GID=1000 \
-    TZ=UTC
+    TZ=UTC \
+    T_HCHECK=60 \
+    I_HCHECK=600 \
+    R_HCHECK=2
 
 ## Ensure latest version
 RUN yum -y update && yum -y upgrade && yum clean all
@@ -52,7 +55,6 @@ RUN chmod 777 /home/steam/run.sh \
  && mkdir /home/steam/steamcmd \
  && cd /home/steam/steamcmd \
  && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
-
  
 # Define default config file in /etc/arkmanager
 COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
@@ -73,4 +75,4 @@ WORKDIR /ark
 # Update game launch the game.
 ENTRYPOINT ["/home/steam/user.sh"]
 
-HEALTHCHECK --interval=600s --timeout=60s --retries=2 --start-period=600s CMD /home/steam/ark-healthcheck.sh
+HEALTHCHECK --interval=${I_HCHECK}s --timeout=${T_HCHECK}s --retries=${R_HCHECK} --start-period=600s CMD /home/steam/ark-healthcheck.sh
