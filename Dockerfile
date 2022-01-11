@@ -1,6 +1,6 @@
-FROM centos:8
+FROM rockylinux/rockylinux:8
 LABEL maintainer="NightDragon"
-LABEL version="2.2"
+LABEL version="3.0"
 LABEL description="ARK Survival Evolved dedicated game server, based on CentOS including steamcmd, arkmanager and cron."
 
 # Bootstrapping variables
