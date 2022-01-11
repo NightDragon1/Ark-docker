@@ -220,3 +220,4 @@ Currently none
   - Removed ARK Mod "ACM" to be configured per default as it's not compatible anymore with Gen2 and not maintaned too
 + 3.0
   - Change to Rock Linux
+  - removed crudini, as it doesn't work as expected and a script may be a better solution for managing the ini-files
