@@ -27,8 +27,10 @@ RUN yum -y update && yum -y upgrade && yum clean all
 
 ## Install dependencies
 RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib \
- && yum clean all \
- && adduser -u $ARK_UID -s /bin/bash -U steam
+ && yum clean all
+
+# Add User
+RUN adduser -u $ARK_UID -s /bin/bash -U steam
 
 # Copy & rights to folders
 COPY run.sh /home/steam/run.sh
@@ -50,10 +52,8 @@ RUN chmod 777 /home/steam/run.sh \
  && mkdir /home/steam/steamcmd \
  && cd /home/steam/steamcmd \
  && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
- 
-#Install curdini for easier editing of the Game.ini and GameUser.ini
-RUN yum -y localinstall "https://download-ib01.fedoraproject.org/pub/epel/8/Everything/x86_64/Packages/c/crudini-0.9.3-1.el8.noarch.rpm"
 
+ 
 # Define default config file in /etc/arkmanager
 COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
 
