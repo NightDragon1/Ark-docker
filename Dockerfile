@@ -23,7 +23,7 @@ ENV SESSIONNAME="ARK Docker" \
     TZ=UTC
 
 ## Ensure latest version
-RUN yum upgrade -y
+RUN yum -y update && yum -y upgrade && yum clean all
 
 ## Install dependencies
 RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib \
