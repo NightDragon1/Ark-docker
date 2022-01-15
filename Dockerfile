@@ -74,4 +74,4 @@ WORKDIR /ark
 # Update game launch the game.
 ENTRYPOINT ["/home/steam/user.sh"]
 
-HEALTHCHECK --interval=300  --timeout=60 --retries=2 --start-period=600s CMD /home/steam/ark-healthcheck.sh
+HEALTHCHECK --interval=300s  --timeout=60s --retries=2 --start-period=600s CMD /home/steam/ark-healthcheck.sh
