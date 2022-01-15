@@ -21,8 +21,8 @@ ENV SESSIONNAME="ARK Docker" \
     ARK_UID=1000 \
     ARK_GID=1000 \
     TZ=UTC \
-    T_HCHECK=60 \
-    I_HCHECK=600 \
+    T_HCHECK=60s \
+    I_HCHECK=600s \
     R_HCHECK=2
 
 ## Ensure latest version
@@ -77,4 +77,4 @@ WORKDIR /ark
 # Update game launch the game.
 ENTRYPOINT ["/home/steam/user.sh"]
 
-HEALTHCHECK --interval="$I_HCHECK"s --timeout="$T_HCHECK"s --retries="$R_HCHECK" --start-period=600s CMD /home/steam/ark-healthcheck.sh
+HEALTHCHECK --interval=${I_HCHECK}  --timeout=${T_HCHECK} --retries=${R_HCHECK} --start-period=600s CMD /home/steam/ark-healthcheck.sh
