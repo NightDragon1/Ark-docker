@@ -29,7 +29,7 @@ ENV SESSIONNAME="ARK Docker" \
 RUN yum -y update && yum -y upgrade && yum clean all
 
 ## Install dependencies
-RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib \
+RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib findutils\
  && yum clean all
 
 # Add User
