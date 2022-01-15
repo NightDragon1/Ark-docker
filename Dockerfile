@@ -1,7 +1,7 @@
 FROM rockylinux/rockylinux:8
 LABEL maintainer="NightDragon"
 LABEL version="3.0"
-LABEL description="ARK Survival Evolved dedicated game server, based on Rocky Linux including steamcmd and arkmanager"
+LABEL description="ARK Survival Evolved dedicated game server, based on Rocky Linux including steamcmd, arkmanager and cron"
 
 # Bootstrapping variables
 ENV SESSIONNAME="ARK Docker" \
