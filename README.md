@@ -221,7 +221,3 @@ Currently none
 + 3.0
   - Change to Rock Linux
   - removed crudini, as it doesn't work as expected and a script may be a better solution for managing the ini-files
-  - Added new environmentvariables, all simple number (please don't use any suffix like 60s --> only 60 is enough)
-    - I_HCHECK, defaults to 600 seconds, intervall between health checks
-    - T_HCHECK, defaults to 60 seconds, timeout of healhcheck
-    - R_HCHECK, defaults to 2, how often to retry a healthcheck
