@@ -1,7 +1,7 @@
 FROM steamcmd/steamcmd:alpine
 LABEL maintainer="NightDragon"
 LABEL version="3.0"
-LABEL description="ARK Survival Evolved dedicated game server, based on CentOS including steamcmd, arkmanager and cron."
+LABEL description="ARK Survival Evolved dedicated game server, based on Alpine-Linux including steamcmd, arkmanager and cron."
 
 # Bootstrapping variables
 ENV SESSIONNAME="ARK Docker" \
@@ -33,9 +33,7 @@ RUN apk add util-linux pciutils usbutils coreutils binutils findutils grep bash 
 ## Install dependencies
 RUN apk add git bzip2 lsof perl-compress-raw-zlib git curl ncurses libstdc++
 
-
-#RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib \
-# && yum clean all \
+# Add User
 RUN addgroup -g ${ARK_GID} steam
 RUN adduser -D -u $ARK_UID -G steam -s /bin/bash steam
 
@@ -79,4 +77,4 @@ WORKDIR /ark
 # Update game launch the game.
 ENTRYPOINT ["/home/steam/user.sh"]
 
-HEALTHCHECK --interval=600s --timeout=60s --retries=2 --start-period=600s CMD /home/steam/ark-healthcheck.sh
+HEALTHCHECK --interval=300s --timeout=60s --retries=2 --start-period=600s CMD /home/steam/ark-healthcheck.sh
