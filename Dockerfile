@@ -29,8 +29,10 @@ ENV SESSIONNAME="ARK Docker" \
 RUN yum -y update && yum -y upgrade && yum clean all
 
 ## Install dependencies
-RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib findutils\
+RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib procps-ng findutils \
  && yum clean all
+## Install extra tools
+RUN yum -y install vim nano net-tools
 
 # Add User
 RUN adduser -u $ARK_UID -s /bin/bash -U steam
