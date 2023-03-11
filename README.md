@@ -218,3 +218,5 @@ Currently none
   - Bugfix release regaridng "disk write error" of steamcmd
 + 2.3
   - Removed ARK Mod "ACM" to be configured per default as it's not compatible anymore with Gen2 and not maintaned too
++ 2.4
+  - Bugfix: Fixed an issue where the RCON-Enabled setting from Docker ENV was not properly passed over to the arkmanager.cfg
