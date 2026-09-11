@@ -58,6 +58,30 @@ fi
 echo "Loading crontab..."
 cat /ark/crontab | crontab -
 
+# Regenerate Game.ini from GAMEINI_* envs (Game.ini-only settings, not settable
+# via arkmanager's ark_<Name> launch-param mechanism - see arkGameIniFile in
+# arkmanager.cfg). Rebuilt fresh on every start, same as everything else.
+echo "Writing Game.ini overrides..."
+{
+	echo "[/script/shootergame.shootergamemode]"
+	echo "ResourceNoReplenishRadiusStructures=${GAMEINI_RESOURCE_NO_REPLENISH_RADIUS}"
+	echo "AllowAnyoneBabyImprintCuddle=${GAMEINI_ALLOW_ANYONE_BABY_IMPRINT_CUDDLE}"
+	echo "PoopIntervalMultiplier=${GAMEINI_POOP_INTERVAL_MULTIPLIER}"
+	echo "EggHatchSpeedMultiplier=${GAMEINI_EGG_HATCH_SPEED_MULTIPLIER}"
+	echo "BabyMatureSpeedMultiplier=${GAMEINI_BABY_MATURE_SPEED_MULTIPLIER}"
+	echo "MatingIntervalMultiplier=${GAMEINI_MATING_INTERVAL_MULTIPLIER}"
+	echo "ForceAllStructureLocking=${GAMEINI_FORCE_ALL_STRUCTURE_LOCKING}"
+	echo "FastDecayUnsnappedCoreStructures=${GAMEINI_FAST_DECAY_UNSNAPPED_CORE_STRUCTURES}"
+	echo "DestroyUnconnectedWaterPipes=${GAMEINI_DESTROY_UNCONNECTED_WATER_PIPES}"
+	echo "FastDecayInterval=${GAMEINI_FAST_DECAY_INTERVAL}"
+	# No safe "vanilla" value exists for this one (it force-overrides the engine's
+	# own difficulty scaling) - only emit it if explicitly set, otherwise the
+	# engine's normal DifficultyOffset-based behaviour applies untouched.
+	if [ -n "${GAMEINI_OVERRIDE_DIFFICULTY}" ]; then
+		echo "OverrideOfficialDifficulty=${GAMEINI_OVERRIDE_DIFFICULTY}"
+	fi
+} > /ark/Game.ini.generated
+
 # Launching ark server
 if [ $UPDATEONSTART -eq 0 ]; then
 	arkmanager start --noautoupdate  --verbose	
