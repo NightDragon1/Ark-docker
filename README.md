@@ -220,3 +220,6 @@ Currently none
   - Removed ARK Mod "ACM" to be configured per default as it's not compatible anymore with Gen2 and not maintaned too
 + 2.4
   - Bugfix: Fixed an issue where the RCON-Enabled setting from Docker ENV was not properly passed over to the arkmanager.cfg
++ 3.0
+  - Updates: Switch to Ubuntu 24.04 and general modernizations.
+  - Added Some Mods per defaults (Awesom Admin, S+. Platforms +, ... see config)
