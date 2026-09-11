@@ -43,6 +43,10 @@ RUN apt-get update \
       lib32gcc-s1 \
       lib32stdc++6 \
  && rm -rf /var/lib/apt/lists/* \
+ # ubuntu:24.04 ships a pre-existing "ubuntu" user/group at uid/gid 1000;
+ # collides with the default ARK_UID/ARK_GID, so remove it before adding "steam"
+ && userdel -r ubuntu 2>/dev/null || true \
+ && groupdel ubuntu 2>/dev/null || true \
  && useradd -m -U -u $ARK_UID -s /bin/bash steam
 
 # Copy & rights to folders
