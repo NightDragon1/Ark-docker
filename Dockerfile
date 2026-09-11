@@ -1,7 +1,7 @@
-FROM centos:8
+FROM ubuntu:24.04
 LABEL maintainer="NightDragon"
-LABEL version="2.4"
-LABEL description="ARK Survival Evolved dedicated game server, based on CentOS including steamcmd, arkmanager and cron."
+LABEL version="3.0"
+LABEL description="ARK Survival Evolved dedicated game server, based on Ubuntu 24.04 LTS including steamcmd, arkmanager and cron."
 
 # Bootstrapping variables
 ENV SESSIONNAME="ARK Docker" \
@@ -20,15 +20,30 @@ ENV SESSIONNAME="ARK Docker" \
     WARNONSTOP=1 \
     ARK_UID=1000 \
     ARK_GID=1000 \
-    TZ=UTC
-
-## Ensure latest version
-RUN yum upgrade -y
+    TZ=UTC \
+    DEBIAN_FRONTEND=noninteractive
 
 ## Install dependencies
-RUN yum -y install glibc.x86_64 libstdc++.x86_64 glibc.i686 libstdc++.i686 git lsof bzip2 cronie perl-Compress-Zlib \
- && yum clean all \
- && adduser -u $ARK_UID -s /bin/bash -U steam
+# ca-certificates/curl  : steamcmd download + arkmanager's own HTTPS calls
+# git                   : clone ark-server-tools, weekly "upgrade-tools" cron job
+# lsof, bzip2           : used by arkmanager itself
+# cron                  : job scheduler (was "cronie" on CentOS)
+# libcompress-raw-zlib-perl : Perl module arkmanager uses for backup handling (was "perl-Compress-Zlib")
+# libc6-i386, lib32gcc-s1, lib32stdc++6 : 32-bit glibc runtime steamcmd/ShooterGameServer need
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+      ca-certificates \
+      curl \
+      git \
+      lsof \
+      bzip2 \
+      cron \
+      libcompress-raw-zlib-perl \
+      libc6-i386 \
+      lib32gcc-s1 \
+      lib32stdc++6 \
+ && rm -rf /var/lib/apt/lists/* \
+ && useradd -m -U -u $ARK_UID -s /bin/bash steam
 
 # Copy & rights to folders
 COPY run.sh /home/steam/run.sh
@@ -50,14 +65,14 @@ RUN chmod 777 /home/steam/run.sh \
  && mkdir /home/steam/steamcmd \
  && cd /home/steam/steamcmd \
  && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
- 
+
 # Define default config file in /etc/arkmanager
 COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
 
 # Define default config file in /etc/arkmanager
 COPY instance.cfg /etc/arkmanager/instances/main.cfg
 
-EXPOSE ${STEAMPORT} ${RCONPORT} ${SERVERPORT} 
+EXPOSE ${STEAMPORT} ${RCONPORT} ${SERVERPORT}
 # Add UDP
 EXPOSE ${STEAMPORT}/udp ${SERVERPORT}/udp
 
