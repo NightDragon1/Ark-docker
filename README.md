@@ -223,3 +223,5 @@ Currently none
 + 3.0
   - Updates: Switch to Ubuntu 24.04 and general modernizations.
   - Added Some Mods per defaults (Awesom Admin, S+. Platforms +, ... see config)
++ 3.1
+  - Added some more Game_Variables. The defaults are the ones I use.
