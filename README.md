@@ -152,6 +152,7 @@ To add mods, you only need to change the variable ark_GameModIds in *arkmanager.
 + __GAMERULE_SHOW_FLOATING_DAMAGE_TEXT__ : Show floating damage numbers (default : true)
 
 ### Breeding / difficulty (Game.ini, regenerated fresh on every start)
+> **Note:** `GAMEINI_*` values are patched directly into the real `Game.ini`, not via the launch parameters `GAMERULE_*` uses. The file only exists once the server has booted at least once, so these settings take effect starting with the restart after initial setup, not on the very first start.
 + __GAMEINI_OVERRIDE_DIFFICULTY__ : Overrides engine difficulty offset, raises max wild dino level/loot quality (default : 5.0)
 + __GAMEINI_RESOURCE_NO_REPLENISH_RADIUS__ : Radius around structures where resources won't respawn (default : 0.8)
 + __GAMEINI_ALLOW_ANYONE_BABY_IMPRINT_CUDDLE__ : Allow any tribe member to cuddle/imprint, not just the imprinter (default : true)
