@@ -1,6 +1,6 @@
 FROM ubuntu:24.04
 LABEL maintainer="NightDragon"
-LABEL version="3.1"
+LABEL version="3.2"
 LABEL description="ARK Survival Evolved dedicated game server, based on Ubuntu 24.04 LTS including steamcmd, arkmanager and cron."
 
 # Bootstrapping variables
@@ -24,17 +24,6 @@ ENV SESSIONNAME="ARK Docker" \
     GAMERULE_PER_PLATFORM_MAX_STRUCTURES_MULTIPLIER=4.0 \
     GAMERULE_AUTO_DESTROY_DECAYED_DINOS=true \
     GAMERULE_SHOW_FLOATING_DAMAGE_TEXT=true \
-    GAMEINI_OVERRIDE_DIFFICULTY=5.0 \
-    GAMEINI_RESOURCE_NO_REPLENISH_RADIUS=0.8 \
-    GAMEINI_ALLOW_ANYONE_BABY_IMPRINT_CUDDLE=true \
-    GAMEINI_POOP_INTERVAL_MULTIPLIER=2.5 \
-    GAMEINI_EGG_HATCH_SPEED_MULTIPLIER=1.5 \
-    GAMEINI_BABY_MATURE_SPEED_MULTIPLIER=2.0 \
-    GAMEINI_MATING_INTERVAL_MULTIPLIER=2.0 \
-    GAMEINI_FORCE_ALL_STRUCTURE_LOCKING=true \
-    GAMEINI_FAST_DECAY_UNSNAPPED_CORE_STRUCTURES=true \
-    GAMEINI_DESTROY_UNCONNECTED_WATER_PIPES=true \
-    GAMEINI_FAST_DECAY_INTERVAL=64800 \
     ARKCLUSTERID=cluster1 \
     UPDATEONSTART=1 \
     BACKUPONSTART=1 \
@@ -95,14 +84,14 @@ RUN chmod 777 /home/steam/run.sh \
  && mkdir /home/steam/steamcmd \
  && cd /home/steam/steamcmd \
  && curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
-
+ 
 # Define default config file in /etc/arkmanager
 COPY arkmanager-system.cfg /etc/arkmanager/arkmanager.cfg
 
 # Define default config file in /etc/arkmanager
 COPY instance.cfg /etc/arkmanager/instances/main.cfg
 
-EXPOSE ${STEAMPORT} ${RCONPORT} ${SERVERPORT}
+EXPOSE ${STEAMPORT} ${RCONPORT} ${SERVERPORT} 
 # Add UDP
 EXPOSE ${STEAMPORT}/udp ${SERVERPORT}/udp
 
