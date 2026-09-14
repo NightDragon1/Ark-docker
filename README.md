@@ -256,3 +256,5 @@ Currently none
   - Added Some Mods per defaults (Awesom Admin, S+. Platforms +, ... see config)
 + 3.1
   - Added some more Game_Variables. The defaults are the ones I use.
++ 3.2
+  - Bugfix Release. Mods removed, Game-Ini Adaption removed; Left: ENV-Changes and OS upgrade
