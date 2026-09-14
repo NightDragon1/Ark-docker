@@ -58,52 +58,6 @@ fi
 echo "Loading crontab..."
 cat /ark/crontab | crontab -
 
-# Apply GAMEINI_* envs into the server's real Game.ini, in place - never a
-# wholesale overwrite. On the very first ever start the file doesn't exist
-# yet (the engine only creates it once it boots, further down via
-# "arkmanager start"), so we deliberately do nothing and let the engine
-# create it untouched - our overrides simply won't apply on this one boot.
-# From the next restart onward the file exists, so we patch just our keys
-# into it: existing keys get their value replaced in place, missing keys
-# get appended under the section header, everything else already in the
-# file (manual edits, mod-added settings) is left exactly as-is.
-GAMEINI_TARGET="/ark/server/ShooterGame/Saved/Config/LinuxServer/Game.ini"
-GAMEINI_SECTION='[/script/shootergame.shootergamemode]'
-
-if [ -f "$GAMEINI_TARGET" ]; then
-	echo "Updating Game.ini overrides..."
-	grep -qxF "$GAMEINI_SECTION" "$GAMEINI_TARGET" || printf '%s\n' "$GAMEINI_SECTION" >> "$GAMEINI_TARGET"
-
-	set_gameini_key() {
-		local key="$1" val="$2"
-		[ -z "$val" ] && return 0
-		if grep -q "^${key}=" "$GAMEINI_TARGET"; then
-			sed -i "s|^${key}=.*|${key}=${val}|" "$GAMEINI_TARGET"
-		else
-			local ln
-			ln=$(grep -nxF "$GAMEINI_SECTION" "$GAMEINI_TARGET" | head -n1 | cut -d: -f1)
-			sed -i "${ln}a ${key}=${val}" "$GAMEINI_TARGET"
-		fi
-	}
-
-	set_gameini_key "ResourceNoReplenishRadiusStructures" "${GAMEINI_RESOURCE_NO_REPLENISH_RADIUS}"
-	set_gameini_key "AllowAnyoneBabyImprintCuddle"        "${GAMEINI_ALLOW_ANYONE_BABY_IMPRINT_CUDDLE}"
-	set_gameini_key "PoopIntervalMultiplier"              "${GAMEINI_POOP_INTERVAL_MULTIPLIER}"
-	set_gameini_key "EggHatchSpeedMultiplier"             "${GAMEINI_EGG_HATCH_SPEED_MULTIPLIER}"
-	set_gameini_key "BabyMatureSpeedMultiplier"           "${GAMEINI_BABY_MATURE_SPEED_MULTIPLIER}"
-	set_gameini_key "MatingIntervalMultiplier"            "${GAMEINI_MATING_INTERVAL_MULTIPLIER}"
-	set_gameini_key "ForceAllStructureLocking"            "${GAMEINI_FORCE_ALL_STRUCTURE_LOCKING}"
-	set_gameini_key "FastDecayUnsnappedCoreStructures"    "${GAMEINI_FAST_DECAY_UNSNAPPED_CORE_STRUCTURES}"
-	set_gameini_key "DestroyUnconnectedWaterPipes"        "${GAMEINI_DESTROY_UNCONNECTED_WATER_PIPES}"
-	set_gameini_key "FastDecayInterval"                   "${GAMEINI_FAST_DECAY_INTERVAL}"
-	# No safe "vanilla" value exists for this one (it force-overrides the
-	# engine's own difficulty scaling) - only set it if explicitly configured,
-	# otherwise the engine's normal DifficultyOffset-based behaviour applies.
-	set_gameini_key "OverrideOfficialDifficulty"          "${GAMEINI_OVERRIDE_DIFFICULTY}"
-else
-	echo "Game.ini not found yet (first boot) - GAMEINI_* overrides will apply starting with the next restart."
-fi
-
 # Launching ark server
 if [ $UPDATEONSTART -eq 0 ]; then
 	arkmanager start --noautoupdate  --verbose	
